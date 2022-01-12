@@ -432,14 +432,14 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
   # Determine host port
   function set-port() {
     echo "What port do you want WireGuard server to listen to?"
-    echo "  1) 51820 (Recommended)"
+    echo "  1) 60664 (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${SERVER_PORT_SETTINGS}" =~ ^[1-2]$ ]]; do
       read -rp "Port Choice [1-2]:" -e -i 1 SERVER_PORT_SETTINGS
     done
     case ${SERVER_PORT_SETTINGS} in
     1)
-      SERVER_PORT="51820"
+      SERVER_PORT="60664"
       if [ "$(lsof -i UDP:"${SERVER_PORT}")" ]; then
         echo "Error: Please use a different port because ${SERVER_PORT} is already in use."
       fi
@@ -621,7 +621,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  1) Yes (Recommended)"
     echo "  2) No (Advanced)"
     until [[ "${AUTOMATIC_BACKUP_SETTINGS}" =~ ^[1-2]$ ]]; do
-      read -rp "Automatic Backup [1-2]:" -e -i 1 AUTOMATIC_BACKUP_SETTINGS
+      read -rp "Automatic Backup [1-2]:" -e -i 2 AUTOMATIC_BACKUP_SETTINGS
     done
     case ${AUTOMATIC_BACKUP_SETTINGS} in
     1)
@@ -661,7 +661,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
       echo "  1) Yes (Recommended)"
       echo "  2) No"
       until [[ "${CONTENT_BLOCKER_SETTINGS}" =~ ^[1-2]$ ]]; do
-        read -rp "Content Blocker Choice [1-2]:" -e -i 1 CONTENT_BLOCKER_SETTINGS
+        read -rp "Content Blocker Choice [1-2]:" -e -i 2 CONTENT_BLOCKER_SETTINGS
       done
       case ${CONTENT_BLOCKER_SETTINGS} in
       1)
@@ -755,7 +755,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  1) Every Year (Recommended)"
     echo "  2) No"
     until [[ "${AUTOMATIC_CONFIG_REMOVER}" =~ ^[1-2]$ ]]; do
-      read -rp "Automatic config expire [1-2]:" -e -i 1 AUTOMATIC_CONFIG_REMOVER
+      read -rp "Automatic config expire [1-2]:" -e -i 2 AUTOMATIC_CONFIG_REMOVER
     done
     case ${AUTOMATIC_CONFIG_REMOVER} in
     1)
