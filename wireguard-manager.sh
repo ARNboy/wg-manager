@@ -284,19 +284,19 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
   # Custom IPv4 subnet
   function set-ipv4-subnet() {
     echo "What IPv4 subnet do you want to use?"
-    echo "  1) 10.0.0.0/8 (Recommended)"
+    echo "  1) 10.66.66.0/24 (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${IPV4_SUBNET_SETTINGS}" =~ ^[1-2]$ ]]; do
       read -rp "Subnet Choice [1-2]:" -e -i 1 IPV4_SUBNET_SETTINGS
     done
     case ${IPV4_SUBNET_SETTINGS} in
     1)
-      IPV4_SUBNET="10.0.0.0/8"
+      IPV4_SUBNET="10.66.66.0/24"
       ;;
     2)
       read -rp "Custom IPv4 Subnet:" IPV4_SUBNET
       if [ -z "${IPV4_SUBNET}" ]; then
-        IPV4_SUBNET="10.0.0.0/8"
+        IPV4_SUBNET="10.66.66.0/24"
       fi
       ;;
     esac
@@ -308,19 +308,19 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
   # Custom IPv6 subnet
   function set-ipv6-subnet() {
     echo "What IPv6 subnet do you want to use?"
-    echo "  1) fd00:00:00::0/8 (Recommended)"
+    echo "  1) fd42:42:42::0/64 (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${IPV6_SUBNET_SETTINGS}" =~ ^[1-2]$ ]]; do
       read -rp "Subnet Choice [1-2]:" -e -i 1 IPV6_SUBNET_SETTINGS
     done
     case ${IPV6_SUBNET_SETTINGS} in
     1)
-      IPV6_SUBNET="fd00:00:00::0/8"
+      IPV6_SUBNET="fd42:42:42::0/64"
       ;;
     2)
       read -rp "Custom IPv6 Subnet:" IPV6_SUBNET
       if [ -z "${IPV6_SUBNET}" ]; then
-        IPV6_SUBNET="fd00:00:00::0/8"
+        IPV6_SUBNET="fd42:42:42::0/64"
       fi
       ;;
     esac
@@ -484,14 +484,14 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
   # Custom MTU or default settings
   function mtu-set() {
     echo "What MTU do you want to use?"
-    echo "  1) 1280 (Recommended)"
+    echo "  1) 1370 (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${MTU_CHOICE_SETTINGS}" =~ ^[1-2]$ ]]; do
       read -rp "MTU Choice [1-2]:" -e -i 1 MTU_CHOICE_SETTINGS
     done
     case ${MTU_CHOICE_SETTINGS} in
     1)
-      MTU_CHOICE="1280"
+      MTU_CHOICE="1370"
       ;;
     2)
       until [[ "${MTU_CHOICE}" =~ ^[0-9]+$ ]] && [ "${MTU_CHOICE}" -ge 1 ] && [ "${MTU_CHOICE}" -le 65535 ]; do
@@ -540,7 +540,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  2) Disable IPv4"
     echo "  3) Disable IPv6"
     until [[ "${DISABLE_HOST_SETTINGS}" =~ ^[1-3]$ ]]; do
-      read -rp "Disable Host Choice [1-3]:" -e -i 1 DISABLE_HOST_SETTINGS
+      read -rp "Disable Host Choice [1-3]:" -e -i 3 DISABLE_HOST_SETTINGS
     done
     case ${DISABLE_HOST_SETTINGS} in
     1)
@@ -590,7 +590,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  1) Yes (Recommended)"
     echo "  2) No (Advanced)"
     until [[ "${AUTOMATIC_UPDATES_SETTINGS}" =~ ^[1-2]$ ]]; do
-      read -rp "Automatic Updates [1-2]:" -e -i 1 AUTOMATIC_UPDATES_SETTINGS
+      read -rp "Automatic Updates [1-2]:" -e -i 2 AUTOMATIC_UPDATES_SETTINGS
     done
     case ${AUTOMATIC_UPDATES_SETTINGS} in
     1)
