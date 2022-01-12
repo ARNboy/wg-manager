@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/ARNboy/wireguard-manager
+# https://github.com/ARNboy
 
 # Require script to be run as root
 function super-user-check() {
