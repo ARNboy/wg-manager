@@ -540,7 +540,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  2) Disable IPv4"
     echo "  3) Disable IPv6"
     until [[ "${DISABLE_HOST_SETTINGS}" =~ ^[1-3]$ ]]; do
-      read -rp "Disable Host Choice [1-3]:" -e -i 3 DISABLE_HOST_SETTINGS
+      read -rp "Disable Host Choice [1-3]:" -e -i 1 DISABLE_HOST_SETTINGS
     done
     case ${DISABLE_HOST_SETTINGS} in
     1)
