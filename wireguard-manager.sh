@@ -284,19 +284,19 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
   # Custom IPv4 subnet
   function set-ipv4-subnet() {
     echo "What IPv4 subnet do you want to use?"
-    echo "  1) 10.66.66.0/24 (Recommended)"
+    echo "  1) 172.11.0.0/24 (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${IPV4_SUBNET_SETTINGS}" =~ ^[1-2]$ ]]; do
       read -rp "Subnet Choice [1-2]:" -e -i 1 IPV4_SUBNET_SETTINGS
     done
     case ${IPV4_SUBNET_SETTINGS} in
     1)
-      IPV4_SUBNET="10.66.66.0/24"
+      IPV4_SUBNET="172.11.0.0/24"
       ;;
     2)
       read -rp "Custom IPv4 Subnet:" IPV4_SUBNET
       if [ -z "${IPV4_SUBNET}" ]; then
-        IPV4_SUBNET="10.66.66.0/24"
+        IPV4_SUBNET="172.11.0.0/24"
       fi
       ;;
     esac
