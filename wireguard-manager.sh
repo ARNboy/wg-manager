@@ -266,12 +266,12 @@ function headless-install() {
     SERVER_HOST_SETTINGS=${SERVER_HOST_SETTINGS:-1}
     DISABLE_HOST_SETTINGS=${DISABLE_HOST_SETTINGS:-1}
     CLIENT_ALLOWED_IP_SETTINGS=${CLIENT_ALLOWED_IP_SETTINGS:-1}
-    AUTOMATIC_UPDATES_SETTINGS=${AUTOMATIC_UPDATES_SETTINGS:-2}
-    AUTOMATIC_BACKUP_SETTINGS=${AUTOMATIC_BACKUP_SETTINGS:-2}
+    AUTOMATIC_UPDATES_SETTINGS=${AUTOMATIC_UPDATES_SETTINGS:-1}
+    AUTOMATIC_BACKUP_SETTINGS=${AUTOMATIC_BACKUP_SETTINGS:-1}
     DNS_PROVIDER_SETTINGS=${DNS_PROVIDER_SETTINGS:-1}
     CONTENT_BLOCKER_SETTINGS=${CONTENT_BLOCKER_SETTINGS:-1}
     CLIENT_NAME=${CLIENT_NAME:-$(openssl rand -hex 50)}
-    AUTOMATIC_CONFIG_REMOVER=${AUTOMATIC_CONFIG_REMOVER:-2}
+    AUTOMATIC_CONFIG_REMOVER=${AUTOMATIC_CONFIG_REMOVER:-1}
   fi
 }
 
@@ -284,19 +284,19 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
   # Custom IPv4 subnet
   function set-ipv4-subnet() {
     echo "What IPv4 subnet do you want to use?"
-    echo "  1) 172.11.0.0/24 (Recommended)"
+    echo "  1) 10.66.66.0/24 (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${IPV4_SUBNET_SETTINGS}" =~ ^[1-2]$ ]]; do
       read -rp "Subnet Choice [1-2]:" -e -i 1 IPV4_SUBNET_SETTINGS
     done
     case ${IPV4_SUBNET_SETTINGS} in
     1)
-      IPV4_SUBNET="172.11.0.0/24"
+      IPV4_SUBNET="10.66.66.0/24"
       ;;
     2)
       read -rp "Custom IPv4 Subnet:" IPV4_SUBNET
       if [ -z "${IPV4_SUBNET}" ]; then
-        IPV4_SUBNET="172.11.0.0/24"
+        IPV4_SUBNET="10.66.66.0/24"
       fi
       ;;
     esac
@@ -540,7 +540,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  2) Disable IPv4"
     echo "  3) Disable IPv6"
     until [[ "${DISABLE_HOST_SETTINGS}" =~ ^[1-3]$ ]]; do
-      read -rp "Disable Host Choice [1-3]:" -e -i 1 DISABLE_HOST_SETTINGS
+      read -rp "Disable Host Choice [1-3]:" -e -i 3 DISABLE_HOST_SETTINGS
     done
     case ${DISABLE_HOST_SETTINGS} in
     1)
@@ -652,7 +652,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
     echo "  1) Unbound (Recommended)"
     echo "  2) Custom (Advanced)"
     until [[ "${DNS_PROVIDER_SETTINGS}" =~ ^[1-2]$ ]]; do
-      read -rp "DNS provider [1-2]:" -e -i 1 DNS_PROVIDER_SETTINGS
+      read -rp "DNS provider [1-2]:" -e -i 2 DNS_PROVIDER_SETTINGS
     done
     case ${DNS_PROVIDER_SETTINGS} in
     1)
@@ -661,7 +661,7 @@ if [ ! -f "${WIREGUARD_CONFIG}" ]; then
       echo "  1) Yes (Recommended)"
       echo "  2) No"
       until [[ "${CONTENT_BLOCKER_SETTINGS}" =~ ^[1-2]$ ]]; do
-        read -rp "Content Blocker Choice [1-2]:" -e -i 1 CONTENT_BLOCKER_SETTINGS
+        read -rp "Content Blocker Choice [1-2]:" -e -i 2 CONTENT_BLOCKER_SETTINGS
       done
       case ${CONTENT_BLOCKER_SETTINGS} in
       1)
